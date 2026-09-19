@@ -59,7 +59,7 @@ jobs:
                 }
               }')
 
-            # 5. Send Email
+            # Send Email
             aws ses send-email \
               --from "$SENDER" \
               --destination "ToAddresses=$RECIPIENT" \
@@ -98,8 +98,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create release archive
-        run: zip -r release.zip . -x '*.git*'
+      - name: Create Clean Plugin Package
+        run: |
+          # 1. Create temporary staging area with exact plugin slug
+          mkdir -p dist/aim-oauth-oidc-sso
+
+          # 2. Copy files into plugin folder (excluding git files and temp builds)
+          rsync -rc --exclude='.git*' --exclude='.github' --exclude='dist' ./ dist/aim-oauth-oidc-sso/
+
+          # 3. Zip from inside dist directory so inner folder is always 'aim-oauth-oidc-sso'
+          cd dist
+          zip -r ../release.zip aim-oauth-oidc-sso
 
       - name: Upload release artifact
         uses: actions/upload-artifact@v4
