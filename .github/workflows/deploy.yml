@@ -98,22 +98,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create version file
-        run: echo ${{ github.sha }} > version
-        shell: bash
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          extensions: mbstring, intl, xml, zip, ldap, pdo, pdo_mysql
-
-      - name: Check Composer Version
-        run: composer --version
-
-      - name: Install Dependencies
-        run: composer install --no-dev --optimize-autoloader
-
       - name: Create release archive
         run: zip -r release.zip . -x '*.git*'
 
