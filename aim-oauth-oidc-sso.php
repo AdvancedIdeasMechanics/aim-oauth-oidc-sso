@@ -601,6 +601,10 @@ class AIM_OAuth_OIDC_SSO {
        ========================================================================== */
 
     public function intercept_login_page() {
+        if ( defined( 'DOING_CRON' ) && DOING_CRON) {
+            return;
+        }
+
         if ( isset( $_GET['action'] ) && $_GET['action'] === 'aim_sso_login' ) {
             $this->start_oauth_redirect();
         }
