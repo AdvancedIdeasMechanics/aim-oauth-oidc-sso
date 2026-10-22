@@ -3,7 +3,7 @@ declare(strict_types=1);
 /**
  * Plugin Name:       AIM OAuth 2.0 PKCE & OIDC SSO
  * Description:       OAuth 2.0 PKCE, OIDC SSO with flexible auth methods, 6-character random backdoor key, JWKS verification, Auto-Discovery, Tabbed Admin, Attribute Mapping, WooCommerce, and REST API Protection.
- * Version:           10.0.0
+ * Version:           10.0.1
  * Author:            Advanced Ideas & Mechanics
  * Author URI:        https://advanced.im/products
  * License:           GPL v3 or later
